@@ -35,7 +35,11 @@ const OTPVerification = () => {
           onChangeText={(text) => setOtp(text)}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleVerifyOTP}>
+        <TouchableOpacity
+          style={[styles.button, otp === "" && styles.disabledButton]}
+          disabled={otp === ""}
+          onPress={handleVerifyOTP}
+        >
           <Text style={styles.buttonText}>Verify OTP</Text>
         </TouchableOpacity>
       </View>
@@ -76,6 +80,14 @@ const styles = StyleSheet.create({
     color: "#3498db",
     textDecorationLine: "underline",
     fontSize: 16,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  disabledButton: {
+    backgroundColor: "#EB984E",
   },
 });
 export default OTPVerification;

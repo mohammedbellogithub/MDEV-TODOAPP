@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   disabledButton: {
-    backgroundColor: "#EB984E", // Change the color to visually indicate a disabled state
+    backgroundColor: "#EB984E",
   },
 });
 

@@ -43,7 +43,15 @@ const NewPassword = ({ route }) => {
           onChangeText={(text) => setConfirmPassword(text)}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleChangePassword}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            (newPassword === "" || confirmPassword === "") &&
+              styles.disabledButton,
+          ]}
+          disabled={newPassword === "" || confirmPassword === ""}
+          onPress={handleChangePassword}
+        >
           <Text style={styles.buttonText}>Change Password</Text>
         </TouchableOpacity>
       </View>
@@ -93,6 +101,9 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  disabledButton: {
+    backgroundColor: "#EB984E",
   },
 });
 export default NewPassword;

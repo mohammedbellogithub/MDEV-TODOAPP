@@ -37,7 +37,11 @@ const ForgotPassword = () => {
           onChangeText={(text) => setEmail(text)}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleSendOTP}>
+        <TouchableOpacity
+          style={[styles.button, email === "" && styles.disabledButton]}
+          disabled={email === ""}
+          onPress={handleSendOTP}
+        >
           <Text style={styles.buttonText}>Send OTP</Text>
         </TouchableOpacity>
 
@@ -95,6 +99,9 @@ const styles = StyleSheet.create({
     color: "#3498db",
     marginTop: 20,
     textDecorationLine: "underline",
+  },
+  disabledButton: {
+    backgroundColor: "#EB984E",
   },
 });
 

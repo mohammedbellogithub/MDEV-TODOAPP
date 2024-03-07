@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, Stack } from "expo-router";
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -22,7 +22,7 @@ export default function UserHome() {
     return input === null || input === undefined || /^\s*$/.test(input);
   }
   const handleAddTask = () => {
-    console.log(`hey from task --> ${task}`);
+    console.log(`hey from task --> ${Platform.OS}`);
     if (!isNullOrWhitespace(task)) {
       Keyboard.dismiss();
       setTaskItems([...taskItems, task]);
@@ -38,6 +38,11 @@ export default function UserHome() {
 
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: `welcome ${params.username}`,
+        }}
+      />
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1,
@@ -62,8 +67,9 @@ export default function UserHome() {
       </ScrollView>
 
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.addTaskKeyword}
+        keyboardVerticalOffset={100}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <TextInput
           style={styles.input}
@@ -71,8 +77,16 @@ export default function UserHome() {
           value={task}
           onChangeText={(text) => setTask(text)}
         />
-        <TouchableOpacity onPress={() => handleAddTask()}>
-          <View style={styles.addWrapper}>
+        <TouchableOpacity
+          disabled={isNullOrWhitespace(task)}
+          onPress={() => handleAddTask()}
+        >
+          <View
+            style={[
+              styles.addBtnContainer,
+              isNullOrWhitespace(task) && styles.disabledButton,
+            ]}
+          >
             <Text style={styles.addText}>+</Text>
           </View>
         </TouchableOpacity>
@@ -99,8 +113,9 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   addTaskKeyword: {
+    flex: 1,
     position: "absolute",
-    bottom: 60,
+    bottom: 40,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-around",
@@ -115,7 +130,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 250,
   },
-  addWrapper: {
+  addBtnContainer: {
     width: 50,
     height: 50,
     backgroundColor: "#e67e22",
@@ -124,6 +139,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "#C0C0C0",
     borderWidth: 1,
+  },
+  disabledButton: {
+    backgroundColor: "#EB984E",
   },
   addText: {},
 });
