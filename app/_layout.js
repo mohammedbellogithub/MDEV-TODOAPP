@@ -7,6 +7,7 @@ export default function Layout() {
         headerStyle: {
           backgroundColor: "#e67e22",
         },
+        title: "",
         headerBackTitleVisible: false,
         headerTintColor: "#fff",
         headerTitleStyle: {

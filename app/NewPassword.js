@@ -9,6 +9,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
+import AppIntro from "../components/AppIntro";
 
 const NewPassword = ({ route }) => {
   const params = useLocalSearchParams();
@@ -23,6 +24,7 @@ const NewPassword = ({ route }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+        <AppIntro />
         <Text style={styles.title}>Create New Password</Text>
 
         <TextInput

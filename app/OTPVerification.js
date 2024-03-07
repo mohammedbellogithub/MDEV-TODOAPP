@@ -8,6 +8,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
+import AppIntro from "../components/AppIntro";
 
 const OTPVerification = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const OTPVerification = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+        <AppIntro />
         <Text style={styles.title}>Verify OTP</Text>
 
         <TextInput

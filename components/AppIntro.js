@@ -1,10 +1,11 @@
 // components/Header.js
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 const AppIntro = () => {
   return (
     <View style={styles.logoContainer}>
+      <Image source={require("../assets/applogo.png")} />
       <Text style={[styles.letter, styles.letterT]}>T</Text>
       <Text style={[styles.letter, styles.letterO]}>O</Text>
       <Text style={[styles.letter, styles.letterD]}>D</Text>
@@ -12,11 +13,16 @@ const AppIntro = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   logoContainer: {
     flexDirection: "row",
+    alignItems: "center",
     marginBottom: 20,
+  },
+  logo: {
+    width: 40, // Adjust the width according to your design
+    height: 40, // Adjust the height according to your design
+    marginRight: 10,
   },
   letter: {
     fontSize: 36,
@@ -36,5 +42,4 @@ const styles = StyleSheet.create({
     color: "#e67e22",
   },
 });
-
 export default AppIntro;

@@ -1,150 +1,129 @@
 import React, { useState } from "react";
+import { useLocalSearchParams } from "expo-router";
 import {
-  View,
+  KeyboardAvoidingView,
+  StyleSheet,
   Text,
+  View,
   TextInput,
   TouchableOpacity,
-  FlatList,
-  StyleSheet,
+  Platform,
+  Keyboard,
+  ScrollView,
 } from "react-native";
-import { Stack, useLocalSearchParams } from "expo-router";
+import Task from "../../components/Task";
 
-const UserHome = () => {
+export default function UserHome() {
   const params = useLocalSearchParams();
-  const [todoInput, setTodoInput] = useState("");
-  const [todos, setTodos] = useState([]);
-  const [editingTodo, setEditingTodo] = useState(null);
+  const [task, setTask] = useState("");
+  const [taskItems, setTaskItems] = useState([]);
 
-  const handleAddTodo = () => {
-    if (todoInput.trim() !== "") {
-      if (editingTodo) {
-        // Edit existing todo
-        setTodos((prevTodos) =>
-          prevTodos.map((todo) =>
-            todo.id === editingTodo.id ? { ...todo, text: todoInput } : todo
-          )
-        );
-        setEditingTodo(null);
-      } else {
-        // Add new todo
-        setTodos([...todos, { id: todos.length.toString(), text: todoInput }]);
-      }
-      setTodoInput("");
+  function isNullOrWhitespace(input) {
+    return input === null || input === undefined || /^\s*$/.test(input);
+  }
+  const handleAddTask = () => {
+    console.log(`hey from task --> ${task}`);
+    if (!isNullOrWhitespace(task)) {
+      Keyboard.dismiss();
+      setTaskItems([...taskItems, task]);
+      setTask(null);
     }
   };
 
-  const handleEditTodo = (item) => {
-    setTodoInput(item.text);
-    setEditingTodo(item);
+  const completeTask = (index) => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
   };
-
-  const handleDeleteTodo = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-  };
-
-  const renderItem = ({ item }) => (
-    <View style={styles.todoItem}>
-      <Text style={styles.todoText}>{item.text}</Text>
-      <TouchableOpacity onPress={() => handleEditTodo(item)}>
-        <Text style={styles.editButton}>Edit</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => handleDeleteTodo(item.id)}>
-        <Text style={styles.deleteButton}>Delete</Text>
-      </TouchableOpacity>
-    </View>
-  );
 
   return (
     <View style={styles.container}>
-      <Stack.Screen
-        options={{
-          title: `welcome ${params.username}`,
-          headerStyle: { backgroundColor: "#e67e22" },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
         }}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Enter your todo"
-        placeholderTextColor="#dcdcdc"
-        onChangeText={(text) => setTodoInput(text)}
-        value={todoInput}
-      />
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.tasksContainer}>
+          <Text style={styles.sectionTitle}>Add tasks</Text>
+          <View style={styles.items}>
+            {taskItems.map((item, index) => {
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => completeTask(index)}
+                >
+                  <Task text={item} />
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+      </ScrollView>
 
-      <TouchableOpacity style={styles.addButton} onPress={handleAddTodo}>
-        <Text style={styles.buttonText}>{editingTodo ? "Edit" : "Add"}</Text>
-      </TouchableOpacity>
-
-      <FlatList
-        data={todos}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        style={styles.todoList}
-      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.addTaskKeyword}
+      >
+        <TextInput
+          style={styles.input}
+          placeholder={"Write a task"}
+          value={task}
+          onChangeText={(text) => setTask(text)}
+        />
+        <TouchableOpacity onPress={() => handleAddTask()}>
+          <View style={styles.addWrapper}>
+            <Text style={styles.addText}>+</Text>
+          </View>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 16,
+    backgroundColor: "black",
   },
-  input: {
-    height: 50,
-    borderWidth: 2,
-    marginBottom: 20,
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    width: "80%",
-    fontSize: 16,
-    color: "#333",
-    borderColor: "#333",
+  tasksContainer: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
   },
-  addButton: {
-    backgroundColor: "#e67e22",
-    padding: 15,
-    borderRadius: 8,
-    width: "80%",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 18,
+  sectionTitle: {
+    fontSize: 24,
+    color: "white",
     fontWeight: "bold",
   },
-  todoList: {
-    width: "80%",
-    marginTop: 20,
+  items: {
+    marginTop: 30,
   },
-  todoItem: {
+  addTaskKeyword: {
+    position: "absolute",
+    bottom: 60,
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "#3498db",
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
+    justifyContent: "space-around",
+    alignItems: "center",
   },
-  todoText: {
-    color: "#fff",
-    fontSize: 16,
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: "#FFF",
+    borderRadius: 60,
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    width: 250,
   },
-  editButton: {
-    color: "#2ecc71",
-    fontSize: 16,
-    marginRight: 10,
+  addWrapper: {
+    width: 50,
+    height: 50,
+    backgroundColor: "#e67e22",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
   },
-  deleteButton: {
-    color: "#e74c3c",
-    fontSize: 16,
-  },
+  addText: {},
 });
-
-export default UserHome;

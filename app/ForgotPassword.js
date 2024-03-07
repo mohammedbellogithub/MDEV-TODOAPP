@@ -9,6 +9,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
+import AppIntro from "../components/AppIntro";
 
 const ForgotPassword = () => {
   const router = useRouter();
@@ -26,6 +27,7 @@ const ForgotPassword = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
+        <AppIntro />
         <Text style={styles.title}>Forgot Password</Text>
 
         <TextInput
