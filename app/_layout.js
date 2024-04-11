@@ -8,7 +8,7 @@ export default function Layout() {
           backgroundColor: "#e67e22",
         },
         title: "",
-        headerBackTitleVisible: false,
+        headerBackVisible: false,
         headerTintColor: "#fff",
         headerTitleStyle: {
           fontWeight: "bold",

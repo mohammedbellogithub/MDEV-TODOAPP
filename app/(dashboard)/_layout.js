@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import React, { Component } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
 
 export default function Dashboard() {
@@ -11,16 +11,16 @@ export default function Dashboard() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" size={size} color={color} />
+            <AntDesign name="home" size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="AddTodo"
+        name="Todo"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="add" size={size} color={color} />
+            <FontAwesome6 name="pen-to-square" size={size} color={color} />
           ),
         }}
       />

@@ -1,20 +1,30 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const Task = (props) => {
+  const router = useRouter();
+
+  const handleTaskPress = () => {
+    router.push({
+      pathname: "/Todo",
+    });
+  };
+
   return (
-    <View style={styles.item}>
-      {console.log(props)}
-      <View style={styles.taskDetails}>
-        <Text style={styles.taskItemText}>{props.title}</Text>
-        <Text style={styles.sub}>{props.category}</Text>
-        <Text style={styles.sub}>{props.date}</Text>
+    <TouchableOpacity onPress={handleTaskPress}>
+      <View style={styles.item}>
+        <View style={styles.taskDetails}>
+          <Text style={styles.taskItemText}>{props.title}</Text>
+          <Text style={styles.sub}>{props.category}</Text>
+          <Text style={styles.sub}>{props.date}</Text>
+        </View>
+        <TouchableOpacity onPress={() => props.onDelete(props.id)}>
+          <AntDesign name="delete" size={24} color="black" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={() => props.onDelete(props.id)}>
-        <AntDesign name="delete" size={24} color="black" />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 
