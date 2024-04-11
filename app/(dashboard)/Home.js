@@ -4,29 +4,29 @@ import { Stack } from "expo-router";
 import { View, Text, ScrollView } from "react-native";
 import { Calendar } from "react-native-calendars";
 import Task from "../../components/Task";
-// import transactionsData from "../../Data/transactionsData.json";
+import taskData from "../../data/task.json";
 
 const Home = () => {
   const [selectedDate, setSelectedDate] = useState("");
-  // const [transactions, setTransactions] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString);
   };
 
-  // useEffect(() => {
-  //   const currentDate = new Date().toISOString().split("T")[0];
-  //   setSelectedDate(currentDate);
-  // }, []);
+  useEffect(() => {
+    const currentDate = new Date().toISOString().split("T")[0];
+    setSelectedDate(currentDate);
+  }, []);
 
-  // useEffect(() => {
-  //   if (selectedDate) {
-  //     const filteredTransactions = transactionsData.filter(
-  //       (transaction) => transaction.date === selectedDate
-  //     );
-  //     setTransactions(filteredTransactions);
-  //   }
-  // }, [selectedDate, transactionsData]);
+  useEffect(() => {
+    if (selectedDate) {
+      const filteredTasks = taskData.filter(
+        (task) => task.duedate === selectedDate
+      );
+      setTasks(filteredTasks);
+    }
+  }, [selectedDate, taskData]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -50,15 +50,14 @@ const Home = () => {
         </Text>
 
         <ScrollView style={{ flexGrow: 1, marginTop: 15 }}>
-          {/* {transactions.map((transaction) => ( */}
-          <Task
-            key={transaction.id}
-            title={transaction.title}
-            category={transaction.category}
-            amount={transaction.amount}
-            date={transaction.date}
-          />
-          {/* ))} */}
+          {tasks.map((transaction) => (
+            <Task
+              key={transaction.id}
+              title={transaction.title}
+              category={transaction.category}
+              date={transaction.duedate}
+            />
+          ))}
         </ScrollView>
       </View>
     </View>

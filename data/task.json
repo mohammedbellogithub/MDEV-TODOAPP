@@ -1,107 +1,92 @@
 [
   {
     "id": 1,
-    "title": "Groceries",
-    "category": "Food",
-    "amount": "$50",
-    "date": "2024-04-01"
+    "title": "Buy groceries",
+    "duedate": "2024-04-01",
+    "category": "Food"
   },
   {
     "id": 2,
-    "title": "Gas refill",
-    "category": "Transport",
-    "amount": "$40",
-    "date": "2024-04-03"
+    "title": "Refill gas",
+    "duedate": "2024-04-03",
+    "category": "Transport"
   },
   {
     "id": 3,
-    "title": "New shoes",
-    "category": "Shopping",
-    "amount": "$80",
-    "date": "2024-04-03"
+    "title": "Purchase new shoes",
+    "duedate": "2024-04-03",
+    "category": "Shopping"
   },
   {
     "id": 4,
-    "title": "Dinner with friends",
-    "category": "Food",
-    "amount": "$70",
-    "date": "2024-04-03"
+    "title": "Have dinner with friends",
+    "duedate": "2024-04-03",
+    "category": "Food"
   },
   {
     "id": 5,
-    "title": "Bus pass",
-    "category": "Transport",
-    "amount": "$30",
-    "date": "2024-04-05"
+    "title": "Get a bus pass",
+    "duedate": "2024-04-05",
+    "category": "Transport"
   },
   {
     "id": 6,
-    "title": "Book purchase",
-    "category": "Shopping",
-    "amount": "$25",
-    "date": "2024-04-06"
+    "title": "Buy a book",
+    "duedate": "2024-04-06",
+    "category": "Shopping"
   },
   {
     "id": 7,
-    "title": "Lunch",
-    "category": "Food",
-    "amount": "$15",
-    "date": "2024-04-07"
+    "title": "Have lunch",
+    "duedate": "2024-04-07",
+    "category": "Food"
   },
   {
     "id": 8,
-    "title": "Taxi ride",
-    "category": "Transport",
-    "amount": "$25",
-    "date": "2024-04-08"
+    "title": "Take a taxi ride",
+    "duedate": "2024-04-08",
+    "category": "Transport"
   },
   {
     "id": 9,
-    "title": "Electronics",
-    "category": "Shopping",
-    "amount": "$150",
-    "date": "2024-04-09"
+    "title": "Purchase electronics",
+    "duedate": "2024-04-09",
+    "category": "Shopping"
   },
   {
     "id": 10,
-    "title": "Brunch",
-    "category": "Food",
-    "amount": "$35",
-    "date": "2024-04-10"
+    "title": "Have brunch",
+    "duedate": "2024-04-10",
+    "category": "Food"
   },
   {
     "id": 11,
-    "title": "Uber ride",
-    "category": "Transport",
-    "amount": "$20",
-    "date": "2024-04-11"
+    "title": "Take an Uber ride",
+    "duedate": "2024-04-11",
+    "category": "Transport"
   },
   {
     "id": 12,
-    "title": "Clothing",
-    "category": "Shopping",
-    "amount": "$60",
-    "date": "2024-04-11"
+    "title": "Buy clothing",
+    "duedate": "2024-04-11",
+    "category": "Shopping"
   },
   {
     "id": 13,
-    "title": "Dinner at restaurant",
-    "category": "Food",
-    "amount": "$45",
-    "date": "2024-04-11"
+    "title": "Dine at a restaurant",
+    "duedate": "2024-04-11",
+    "category": "Food"
   },
   {
     "id": 14,
-    "title": "Fuel for car",
-    "category": "Transport",
-    "amount": "$50",
-    "date": "2024-04-11"
+    "title": "Fuel up the car",
+    "duedate": "2024-04-11",
+    "category": "Transport"
   },
   {
     "id": 15,
-    "title": "Gadgets",
-    "category": "Shopping",
-    "amount": "$200",
-    "date": "2024-04-11"
+    "title": "Purchase gadgets",
+    "duedate": "2024-04-11",
+    "category": "Shopping"
   }
 ]
