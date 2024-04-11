@@ -2,91 +2,91 @@
   {
     "id": 1,
     "title": "Buy groceries",
-    "duedate": "2024-04-01",
+    "date": "2024-04-01",
     "category": "Food"
   },
   {
     "id": 2,
     "title": "Refill gas",
-    "duedate": "2024-04-03",
+    "date": "2024-04-03",
     "category": "Transport"
   },
   {
     "id": 3,
     "title": "Purchase new shoes",
-    "duedate": "2024-04-03",
+    "date": "2024-04-03",
     "category": "Shopping"
   },
   {
     "id": 4,
     "title": "Have dinner with friends",
-    "duedate": "2024-04-03",
+    "date": "2024-04-03",
     "category": "Food"
   },
   {
     "id": 5,
     "title": "Get a bus pass",
-    "duedate": "2024-04-05",
+    "date": "2024-04-05",
     "category": "Transport"
   },
   {
     "id": 6,
     "title": "Buy a book",
-    "duedate": "2024-04-06",
+    "date": "2024-04-06",
     "category": "Shopping"
   },
   {
     "id": 7,
     "title": "Have lunch",
-    "duedate": "2024-04-07",
+    "date": "2024-04-07",
     "category": "Food"
   },
   {
     "id": 8,
     "title": "Take a taxi ride",
-    "duedate": "2024-04-08",
+    "date": "2024-04-08",
     "category": "Transport"
   },
   {
     "id": 9,
     "title": "Purchase electronics",
-    "duedate": "2024-04-09",
+    "date": "2024-04-09",
     "category": "Shopping"
   },
   {
     "id": 10,
     "title": "Have brunch",
-    "duedate": "2024-04-10",
+    "date": "2024-04-10",
     "category": "Food"
   },
   {
     "id": 11,
     "title": "Take an Uber ride",
-    "duedate": "2024-04-11",
+    "date": "2024-04-11",
     "category": "Transport"
   },
   {
     "id": 12,
     "title": "Buy clothing",
-    "duedate": "2024-04-11",
+    "date": "2024-04-11",
     "category": "Shopping"
   },
   {
     "id": 13,
     "title": "Dine at a restaurant",
-    "duedate": "2024-04-11",
+    "date": "2024-04-11",
     "category": "Food"
   },
   {
     "id": 14,
     "title": "Fuel up the car",
-    "duedate": "2024-04-11",
+    "date": "2024-04-11",
     "category": "Transport"
   },
   {
     "id": 15,
     "title": "Purchase gadgets",
-    "duedate": "2024-04-11",
+    "date": "2024-04-11",
     "category": "Shopping"
   }
 ]

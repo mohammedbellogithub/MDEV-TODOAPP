@@ -5,10 +5,11 @@ import { AntDesign } from "@expo/vector-icons";
 const Task = (props) => {
   return (
     <View style={styles.item}>
+      {console.log(props)}
       <View style={styles.taskDetails}>
         <Text style={styles.taskItemText}>{props.title}</Text>
-        <Text style={styles.category}>{props.category}</Text>
-        <Text style={styles.dueDate}>{props.dueDate}</Text>
+        <Text style={styles.sub}>{props.category}</Text>
+        <Text style={styles.sub}>{props.date}</Text>
       </View>
       <TouchableOpacity onPress={() => props.onDelete(props.id)}>
         <AntDesign name="delete" size={24} color="black" />
@@ -44,11 +45,7 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: 5,
   },
-  category: {
-    fontSize: 14,
-    color: "#666",
-  },
-  dueDate: {
+  sub: {
     fontSize: 14,
     color: "#666",
   },

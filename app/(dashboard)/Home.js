@@ -17,10 +17,15 @@ const Home = () => {
     setSelectedDate(currentDate);
   }, []);
 
+  const handleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+  };
+
   useEffect(() => {
     if (selectedDate) {
       const filteredTasks = taskData.filter(
-        (task) => task.duedate === selectedDate
+        (task) => task.date === selectedDate
       );
       setTasks(filteredTasks);
     }
@@ -50,10 +55,12 @@ const Home = () => {
           <ScrollView style={{ flexGrow: 1, marginTop: 15 }}>
             {tasks.map((task) => (
               <Task
+                id={task.id}
                 key={task.id}
                 title={task.title}
                 category={task.category}
-                date={task.duedate}
+                date={task.date}
+                onDelete={handleDeleteTask}
               />
             ))}
           </ScrollView>
