@@ -9,7 +9,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import AppIntro from "../components/AppIntro";
+import AppIntro from "../../components/AppIntro";
 
 const NewPassword = ({ route }) => {
   const params = useLocalSearchParams();

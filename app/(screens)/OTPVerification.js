@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import { useRouter } from "expo-router";
-import AuthForm from "../components/AuthForm";
-import AppIntro from "../components/AppIntro";
-
+import { useRouter, useLocalSearchParams } from "expo-router";
 import {
   View,
   Text,
@@ -11,48 +8,44 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import AppIntro from "../../components/AppIntro";
+
+const OTPVerification = () => {
   const router = useRouter();
+  const params = useLocalSearchParams();
+  const [otp, setOtp] = useState("");
+
+  const handleVerifyOTP = () => {
+    router.push({
+      pathname: "/NewPassword",
+      params: { email: params.email },
+    });
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <AppIntro />
+        <Text style={styles.title}>Verify OTP</Text>
+
         <TextInput
           style={styles.input}
-          placeholder="Enter your email"
+          placeholder="Enter OTP"
           placeholderTextColor="#dcdcdc"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => setOtp(text)}
         />
-        <AuthForm setUsername={setUsername} setPassword={setPassword} />
 
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            router.back();
-          }}
+          style={[styles.button, otp === "" && styles.disabledButton]}
+          disabled={otp === ""}
+          onPress={handleVerifyOTP}
         >
-          <Text style={styles.buttonText}>Sign up</Text>
+          <Text style={styles.buttonText}>Verify OTP</Text>
         </TouchableOpacity>
-        <Text style={{ color: "white", paddingTop: 5 }}>
-          Already have an account?{" "}
-          <Text
-            style={styles.signupText}
-            onPress={() => {
-              router.back();
-            }}
-          >
-            Sign in here
-          </Text>
-        </Text>
       </View>
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -61,7 +54,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     paddingHorizontal: 30,
   },
-
   input: {
     height: 50,
     borderWidth: 2,
@@ -80,9 +72,12 @@ const styles = StyleSheet.create({
     width: "80%",
     alignItems: "center",
   },
-  signupText: {
-    color: "#3498db",
+  forgotPasswordContainer: {
+    alignSelf: "flex-end",
     marginTop: 10,
+  },
+  forgotPasswordText: {
+    color: "#3498db",
     textDecorationLine: "underline",
     fontSize: 16,
   },
@@ -91,6 +86,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  disabledButton: {
+    backgroundColor: "#EB984E",
+  },
 });
-
-export default SignUp;
+export default OTPVerification;

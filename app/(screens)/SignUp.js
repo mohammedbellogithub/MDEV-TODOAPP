@@ -1,6 +1,8 @@
-// ForgotPassword.js
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
+import AuthForm from "../../components/AuthForm";
+import AppIntro from "../../components/AppIntro";
+
 import {
   View,
   Text,
@@ -9,49 +11,43 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import AppIntro from "../components/AppIntro";
-
-const ForgotPassword = () => {
-  const router = useRouter();
+const SignUp = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-
-  const handleSendOTP = () => {
-    if (email !== "") {
-      router.push({
-        pathname: "/OTPVerification",
-        params: { email: email },
-      });
-    }
-  };
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <AppIntro />
-        <Text style={styles.title}>Forgot Password</Text>
-
         <TextInput
           style={styles.input}
           placeholder="Enter your email"
           placeholderTextColor="#dcdcdc"
           onChangeText={(text) => setEmail(text)}
         />
+        <AuthForm setUsername={setUsername} setPassword={setPassword} />
 
         <TouchableOpacity
-          style={[styles.button, email === "" && styles.disabledButton]}
-          disabled={email === ""}
-          onPress={handleSendOTP}
-        >
-          <Text style={styles.buttonText}>Send OTP</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
+          style={styles.button}
           onPress={() => {
             router.back();
           }}
         >
-          <Text style={styles.goBackText}>Go back to Sign In</Text>
+          <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
+        <Text style={{ color: "white", paddingTop: 5 }}>
+          Already have an account?{" "}
+          <Text
+            style={styles.signupText}
+            onPress={() => {
+              router.back();
+            }}
+          >
+            Sign in here
+          </Text>
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -65,12 +61,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     paddingHorizontal: 30,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 20,
-  },
+
   input: {
     height: 50,
     borderWidth: 2,
@@ -88,21 +79,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: "80%",
     alignItems: "center",
+  },
+  signupText: {
+    color: "#3498db",
     marginTop: 10,
+    textDecorationLine: "underline",
+    fontSize: 16,
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
   },
-  goBackText: {
-    color: "#3498db",
-    marginTop: 20,
-    textDecorationLine: "underline",
-  },
-  disabledButton: {
-    backgroundColor: "#EB984E",
-  },
 });
 
-export default ForgotPassword;
+export default SignUp;

@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "title": "Groceries",
+    "category": "Food",
+    "amount": "$50",
+    "date": "2024-04-01"
+  },
+  {
+    "id": 2,
+    "title": "Gas refill",
+    "category": "Transport",
+    "amount": "$40",
+    "date": "2024-04-03"
+  },
+  {
+    "id": 3,
+    "title": "New shoes",
+    "category": "Shopping",
+    "amount": "$80",
+    "date": "2024-04-03"
+  },
+  {
+    "id": 4,
+    "title": "Dinner with friends",
+    "category": "Food",
+    "amount": "$70",
+    "date": "2024-04-03"
+  },
+  {
+    "id": 5,
+    "title": "Bus pass",
+    "category": "Transport",
+    "amount": "$30",
+    "date": "2024-04-05"
+  },
+  {
+    "id": 6,
+    "title": "Book purchase",
+    "category": "Shopping",
+    "amount": "$25",
+    "date": "2024-04-06"
+  },
+  {
+    "id": 7,
+    "title": "Lunch",
+    "category": "Food",
+    "amount": "$15",
+    "date": "2024-04-07"
+  },
+  {
+    "id": 8,
+    "title": "Taxi ride",
+    "category": "Transport",
+    "amount": "$25",
+    "date": "2024-04-08"
+  },
+  {
+    "id": 9,
+    "title": "Electronics",
+    "category": "Shopping",
+    "amount": "$150",
+    "date": "2024-04-09"
+  },
+  {
+    "id": 10,
+    "title": "Brunch",
+    "category": "Food",
+    "amount": "$35",
+    "date": "2024-04-10"
+  },
+  {
+    "id": 11,
+    "title": "Uber ride",
+    "category": "Transport",
+    "amount": "$20",
+    "date": "2024-04-11"
+  },
+  {
+    "id": 12,
+    "title": "Clothing",
+    "category": "Shopping",
+    "amount": "$60",
+    "date": "2024-04-11"
+  },
+  {
+    "id": 13,
+    "title": "Dinner at restaurant",
+    "category": "Food",
+    "amount": "$45",
+    "date": "2024-04-11"
+  },
+  {
+    "id": 14,
+    "title": "Fuel for car",
+    "category": "Transport",
+    "amount": "$50",
+    "date": "2024-04-11"
+  },
+  {
+    "id": 15,
+    "title": "Gadgets",
+    "category": "Shopping",
+    "amount": "$200",
+    "date": "2024-04-11"
+  }
+]
