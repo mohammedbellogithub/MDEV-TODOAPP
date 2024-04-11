@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Stack } from "expo-router";
-
 import { View, Text, ScrollView } from "react-native";
 import { Calendar } from "react-native-calendars";
 import Task from "../../components/Task";
@@ -10,7 +8,7 @@ const Home = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [tasks, setTasks] = useState([]);
 
-  const handleDayPress = (day) => {
+  const handleDateSelection = (day) => {
     setSelectedDate(day.dateString);
   };
 
@@ -26,19 +24,14 @@ const Home = () => {
       );
       setTasks(filteredTasks);
     }
-  }, [selectedDate, taskData]);
+  }, [selectedDate]);
 
   return (
     <View style={{ flex: 1 }}>
-      <Stack
-        screenOptions={{
-          headerBackVisible: false,
-        }}
-      />
       <Calendar
-        onDayPress={handleDayPress}
+        onDayPress={handleDateSelection}
         markedDates={{
-          [selectedDate]: { selected: true, selectedColor: "red" },
+          [selectedDate]: { selected: true, selectedColor: "#e67e22" },
         }}
       />
 
@@ -49,16 +42,22 @@ const Home = () => {
           Tasks
         </Text>
 
-        <ScrollView style={{ flexGrow: 1, marginTop: 15 }}>
-          {tasks.map((transaction) => (
-            <Task
-              key={transaction.id}
-              title={transaction.title}
-              category={transaction.category}
-              date={transaction.duedate}
-            />
-          ))}
-        </ScrollView>
+        {tasks.length === 0 ? (
+          <Text style={{ paddingHorizontal: 10 }}>
+            No tasks for selected date
+          </Text>
+        ) : (
+          <ScrollView style={{ flexGrow: 1, marginTop: 15 }}>
+            {tasks.map((task) => (
+              <Task
+                key={task.id}
+                title={task.title}
+                category={task.category}
+                date={task.duedate}
+              />
+            ))}
+          </ScrollView>
+        )}
       </View>
     </View>
   );

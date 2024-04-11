@@ -1,14 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
 const Task = (props) => {
   return (
     <View style={styles.item}>
-      <View style={styles.taskItemLeft}>
-        <View style={styles.bullet}></View>
-        <Text style={styles.taskItemText}>{props.text}</Text>
+      <View style={styles.taskDetails}>
+        <Text style={styles.taskItemText}>{props.title}</Text>
+        <Text style={styles.category}>{props.category}</Text>
+        <Text style={styles.dueDate}>{props.dueDate}</Text>
       </View>
-      <View style={styles.minus}></View>
+      <TouchableOpacity onPress={() => props.onDelete(props.id)}>
+        <AntDesign name="delete" size={24} color="black" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -31,28 +35,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
-  taskItemLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
+  taskDetails: {
+    flexDirection: "column",
+    flex: 1,
   },
   taskItemText: {
-    maxWidth: "80%",
-    marginLeft: 10,
     fontSize: 16,
     color: "#333",
+    marginBottom: 5,
   },
-  bullet: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: "#e67e22",
+  category: {
+    fontSize: 14,
+    color: "#666",
   },
-  minus: {
-    width: 20,
-    height: 5,
-    backgroundColor: "#e67e22",
-    marginLeft: 10,
+  dueDate: {
+    fontSize: 14,
+    color: "#666",
   },
 });
 
