@@ -6,20 +6,40 @@ import {
   StyleSheet,
   TextInput,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import { useRouter } from "expo-router";
 import AppIntro from "../../components/AppIntro";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleSignIn = () => {
-    router.push({
-      pathname: "Home",
-      //   params: { username: username },
-    });
+  const handleSignIn = async () => {
+    try {
+      const userDataJson = await AsyncStorage.getItem("users");
+      if (!userDataJson) {
+        Alert.alert("Error", "No user data found");
+        return;
+      }
+      const userData = JSON.parse(userDataJson);
+      const lowerCaseEmail = email.toLowerCase();
+      const user = userData.find(
+        (user) =>
+          user.email.toLowerCase() === lowerCaseEmail &&
+          user.password === password
+      );
+      if (user) {
+        router.push("/Home");
+      } else {
+        Alert.alert("Error", "Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+      Alert.alert("Error", "An error occurred while signing in");
+    }
   };
 
   const handleForgotPassword = () => {
@@ -41,7 +61,7 @@ const Login = () => {
           style={styles.input}
           placeholder="Enter your email address"
           placeholderTextColor="#dcdcdc"
-          onChangeText={(text) => setUsername(text)}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
@@ -57,9 +77,9 @@ const Login = () => {
         <TouchableOpacity
           style={[
             styles.button,
-            (username === "" || password === "") && styles.disabledButton,
+            (email === "" || password === "") && styles.disabledButton,
           ]}
-          disabled={username === "" || password === ""}
+          disabled={email === "" || password === ""}
           onPress={handleSignIn}
         >
           <Text style={styles.buttonText}>Sign In</Text>

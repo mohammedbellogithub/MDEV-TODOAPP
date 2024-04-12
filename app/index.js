@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import usersData from "../data/user.json";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
 const index = () => {
+  const loadUsersIntoStorage = async () => {
+    try {
+      await AsyncStorage.setItem("users", JSON.stringify(usersData));
+      console.log("User data loaded into AsyncStorage successfully");
+    } catch (error) {
+      console.error(
+        "Failed to load user data into AsyncStorage:",
+        error.message
+      );
+    }
+  };
+
+  useEffect(() => {
+    loadUsersIntoStorage();
+  }, []);
+
   const router = useRouter();
 
   const navigateToWelcome = () => {

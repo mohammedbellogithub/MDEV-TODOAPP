@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import AppIntro from "../../components/AppIntro";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   View,
@@ -8,14 +9,66 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
   SafeAreaView,
 } from "react-native";
 const SignUp = () => {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const router = useRouter();
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isNullOrWhiteSpace = (str) => {
+    return !str || str.trim() === "";
+  };
+
+  const handleSignUp = async () => {
+    try {
+      const existingUserDataJson = await AsyncStorage.getItem("users");
+      console.log(existingUserDataJson);
+      let existingUserData = [];
+      if (existingUserDataJson) {
+        existingUserData = JSON.parse(existingUserDataJson);
+      }
+
+      const emailExists = existingUserData.some((user) => user.email === email);
+
+      if (!isValidEmail(email)) {
+        Alert.alert("Error", "Invalid Email");
+        return;
+      }
+
+      if (emailExists) {
+        Alert.alert("Error", "Email already exists");
+        return;
+      }
+
+      if (isNullOrWhiteSpace(password)) {
+        Alert.alert("Error", "Invalid password");
+        return;
+      }
+
+      const newUser = {
+        name: name,
+        email: email,
+        password: password,
+      };
+
+      const updatedUserData = [...existingUserData, newUser];
+      await AsyncStorage.setItem("users", JSON.stringify(updatedUserData));
+
+      Alert.alert("Success", "User signed up successfully");
+      router.push("/Login");
+    } catch (error) {
+      console.error("Error:", error.message);
+      Alert.alert("Error", "An error occurred while signing up");
+    }
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -25,13 +78,13 @@ const SignUp = () => {
           style={styles.input}
           placeholder="Enter your name"
           placeholderTextColor="#dcdcdc"
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={(text) => setName(text)}
         />
         <TextInput
           style={styles.input}
           placeholder="Enter your email address"
           placeholderTextColor="#dcdcdc"
-          onChangeText={(text) => setUsername(text)}
+          onChangeText={(text) => setEmail(text)}
         />
         <TextInput
           style={styles.input}
@@ -40,12 +93,7 @@ const SignUp = () => {
           secureTextEntry={true}
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            router.back();
-          }}
-        >
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
         <Text style={{ color: "white", paddingTop: 5 }}>
