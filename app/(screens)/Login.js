@@ -32,6 +32,7 @@ const Login = () => {
           user.password === password
       );
       if (user) {
+        await AsyncStorage.setItem("currentUser", JSON.stringify(user));
         router.push("/Home");
       } else {
         Alert.alert("Error", "Invalid email or password");
