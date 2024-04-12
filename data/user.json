@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Mohammed Bello",
+      "email": "mohammedbello876@gmail.com",
+      "password": "p455P455!"
+    },
+    {
+      "id": 2,
+      "name": "Adekola Victor",
+      "email": "adekolavictor51@gmail.con.com",
+      "password": "p455P455!"
+    }
+  ]
+}

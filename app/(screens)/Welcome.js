@@ -4,33 +4,32 @@ import { useRouter } from "expo-router";
 
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
-const index = () => {
+const Welcome = () => {
   const router = useRouter();
 
-  const navigateToWelcome = () => {
-    router.push("/Welcome");
+  const navigateToLogin = () => {
+    router.push("/Login");
   };
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={require("../assets/welcome.png")} />
+        <Image
+          style={styles.image}
+          source={require("../../assets/welcome2.png")}
+        />
       </View>
-      <TouchableOpacity
-        onPress={navigateToWelcome}
-        style={styles.arrowContainer}
-      >
+      <TouchableOpacity onPress={navigateToLogin} style={styles.arrowContainer}>
         <AntDesign style={styles.arrowRight} name="arrowright" />
       </TouchableOpacity>
       <View style={styles.welcomeSection}>
         <View style={styles.logoAndText}>
-          <Image source={require("../assets/applogo.png")} />
-          <Text style={styles.appText}>TODO</Text>
+          <Text style={styles.appText}>Never been easier</Text>
         </View>
-        <Text style={styles.welcomeText}>Welcome</Text>
+        <Text style={styles.introText}>Add, edit todos with one tap</Text>
       </View>
       <View style={styles.bulletContainer}>
-        <Entypo name="dot-single" style={styles.bulletIcon} />
         <Entypo name="dot-single" style={styles.bulletInActiveIcon} />
+        <Entypo name="dot-single" style={styles.bulletIcon} />
       </View>
     </View>
   );
@@ -60,6 +59,7 @@ const styles = StyleSheet.create({
   logoAndText: {
     flexDirection: "row",
     alignContent: "center",
+    marginBottom: 15,
   },
   buttonText: {
     color: "#fff",
@@ -71,10 +71,11 @@ const styles = StyleSheet.create({
     color: "white",
     alignSelf: "center",
   },
-  welcomeText: {
-    fontSize: 30,
+  introText: {
+    fontSize: 15,
     color: "white",
     alignSelf: "center",
+    marginBottom: 15,
   },
   bulletContainer: {
     paddingTop: 5,
@@ -90,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default index;
+export default Welcome;

@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logo: {
-    width: 40, // Adjust the width according to your design
-    height: 40, // Adjust the height according to your design
+    width: 40,
+    height: 40,
     marginRight: 10,
   },
   letter: {

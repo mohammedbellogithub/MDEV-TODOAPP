@@ -1,32 +1,42 @@
 import React, { useState } from "react";
-import { useRouter } from "expo-router";
-import AppIntro from "../../components/AppIntro";
-
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   StyleSheet,
+  TextInput,
   SafeAreaView,
 } from "react-native";
-const SignUp = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+import { useRouter } from "expo-router";
+import AppIntro from "../../components/AppIntro";
 
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const handleSignIn = () => {
+    router.push({
+      pathname: "Home",
+      //   params: { username: username },
+    });
+  };
+
+  const handleForgotPassword = () => {
+    router.push({
+      pathname: "/ForgotPassword",
+    });
+    console.log("Forgot Password clicked");
+  };
+
+  const navigateToSignup = () => {
+    router.push("/SignUp");
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <AppIntro />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter your name"
-          placeholderTextColor="#dcdcdc"
-          onChangeText={(text) => setEmail(text)}
-        />
         <TextInput
           style={styles.input}
           placeholder="Enter your email address"
@@ -40,23 +50,25 @@ const SignUp = () => {
           secureTextEntry={true}
           onChangeText={(text) => setPassword(text)}
         />
+        <Text style={styles.forgotPasswordText} onPress={handleForgotPassword}>
+          Forgot Password?
+        </Text>
+
         <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            router.back();
-          }}
+          style={[
+            styles.button,
+            (username === "" || password === "") && styles.disabledButton,
+          ]}
+          disabled={username === "" || password === ""}
+          onPress={handleSignIn}
         >
-          <Text style={styles.buttonText}>Sign up</Text>
+          <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
         <Text style={{ color: "white", paddingTop: 5 }}>
-          Already have an account?{" "}
-          <Text
-            style={styles.signupText}
-            onPress={() => {
-              router.back();
-            }}
-          >
-            Sign in here
+          New user?
+          <Text style={styles.signupText} onPress={navigateToSignup}>
+            {" "}
+            Sign up here
           </Text>
         </Text>
       </View>
@@ -97,11 +109,20 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     fontSize: 16,
   },
+  forgotPasswordText: {
+    color: "#3498db",
+    marginBottom: 10,
+    textDecorationLine: "underline",
+    fontSize: 16,
+  },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
   },
+  disabledButton: {
+    backgroundColor: "#EB984E",
+  },
 });
 
-export default SignUp;
+export default Login;

@@ -9,6 +9,12 @@ const Task = (props) => {
   const handleTaskPress = () => {
     router.push({
       pathname: "/Todo",
+      params: {
+        id: props.id,
+        title: props.title,
+        category: props.category,
+        date: props.date,
+      },
     });
   };
 

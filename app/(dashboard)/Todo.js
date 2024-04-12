@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
-const AddTodo = ({ task, onSave, onCancel }) => {
+const AddTodo = ({ onSave, onCancel }) => {
+  const task = useLocalSearchParams();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
-  const [dueDate, setDueDate] = useState("");
+  const [date, setdate] = useState("");
+  const [isDetailsView, setIsDetailsView] = useState(false);
 
   useEffect(() => {
-    if (task) {
-      setTitle(task.title);
+    if (task.id !== "") {
+      setIsDetailsView(true);
       setCategory(task.category);
-      setDueDate(task.dueDate);
+      setdate(task.date);
+      setTitle(task.title);
     }
   }, [task]);
 
   const handleSave = () => {
-    onSave({ title, category, dueDate });
+    onSave({ title, category, date });
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitleText}>
+          {isDetailsView ? "Edit Task" : "Add Task"}
+        </Text>
+      </View>
       <Text style={styles.label}>Title:</Text>
       <TextInput
         style={styles.input}
@@ -38,8 +46,8 @@ const AddTodo = ({ task, onSave, onCancel }) => {
       <Text style={styles.label}>Due Date:</Text>
       <TextInput
         style={styles.input}
-        value={dueDate}
-        onChangeText={setDueDate}
+        value={date}
+        onChangeText={setdate}
         placeholder="Enter due date"
       />
       <View style={styles.buttonsContainer}>
@@ -54,6 +62,14 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 20,
+  },
+  sectionHeader: {
+    alignSelf: "center",
+  },
+  sectionTitleText: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "black",
   },
   label: {
     fontSize: 16,
