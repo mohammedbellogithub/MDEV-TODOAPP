@@ -1,11 +1,15 @@
 import { Text, View } from "react-native";
 import React, { Component } from "react";
 import { AntDesign, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
-import { Redirect, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 
 export default function Dashboard() {
   return (
-    <Tabs>
+    <Tabs
+      sceneContainerStyle={{
+        marginTop: 60,
+      }}
+    >
       <Tabs.Screen
         name="Home"
         options={{
